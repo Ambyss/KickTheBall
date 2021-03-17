@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask _fieldMask;
     private Vector3 _newPosition;
     private ForceController _forceController;
+    private bool _isFingerOnPlayer;
     
     private void Start()
     {
@@ -21,14 +22,20 @@ public class PlayerController : MonoBehaviour
         _isPlayerCatched = false;
         _fieldMask = LayerMask.GetMask("Field");
         _forceController = GetComponent<ForceController>();
+        _isFingerOnPlayer = false;
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
+        {
             ThrowRay();
-        if (Input.GetMouseButtonUp(0))
-            _isPlayerCatched = false;
+        }
+        if (Input.GetMouseButtonUp(0) && _isPlayerCatched)
+        {
+                _isPlayerCatched = false;
+                _forceController.ThrowBall();
+        }
         
         if (_isPlayerCatched)
             MovePlayer();
@@ -37,19 +44,13 @@ public class PlayerController : MonoBehaviour
     private void ThrowRay()
     {
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-        
-    }
-
-    private void FixedUpdate()
-    {
         if (Physics.Raycast(_ray, out _hit))
         {
             if (_hit.transform.CompareTag("Player")) 
                 Catch();
         }
     }
-    
+
     private void Catch()
     {
         _isPlayerCatched = true;
@@ -64,4 +65,5 @@ public class PlayerController : MonoBehaviour
             transform.position = _newPosition;
         _forceController.SetArrowTransform();
     }
+
 }

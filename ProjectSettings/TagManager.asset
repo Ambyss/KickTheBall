@@ -8,6 +8,7 @@ TagManager:
   - Field
   - PlayerField
   - Ball
+  - LvlController
   layers:
   - Default
   - TransparentFX
