@@ -13,7 +13,7 @@ public class ForceController : MonoBehaviour
     private Color _standartColor;
     private Color _transparentColor;
     private LevelController _levelController;
-    public bool IsBallThrowed;
+    [HideInInspector] public bool IsBallThrowed;
     
     private void Start()
     {

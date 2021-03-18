@@ -27,6 +27,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // MOBILE
+        if (Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            ThrowRay();
+        }
+        if (Input.GetTouch(0).phase == TouchPhase.Ended && _isPlayerCatched)
+        {
+                _isPlayerCatched = false;
+                _forceController.ThrowBall();
+        }
+        
+        /* PC
         if (Input.GetMouseButtonDown(0))
         {
             ThrowRay();
@@ -35,8 +47,7 @@ public class PlayerController : MonoBehaviour
         {
                 _isPlayerCatched = false;
                 _forceController.ThrowBall();
-        }
-        
+        }*/
         if (_isPlayerCatched)
             MovePlayer();
     }

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private GameObject _arrow;
-    private Vector3 _startPoint;
-
-    private void Start()
+    [SerializeField] private ParticleSystem _crushEffect;
+    public void CrushEffect()
     {
-        _startPoint = transform.position;
+        Instantiate(_crushEffect, transform.position, Quaternion.identity);
     }
 }

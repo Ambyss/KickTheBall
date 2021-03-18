@@ -14,6 +14,8 @@ public class LevelController : MonoBehaviour
     private Vector3 _enemyStartPosition;
     private IEnumerator _lvlDuration;
     [SerializeField] private GameObject _LvlText;
+    [SerializeField] private ParticleSystem _ballCrushSystem;
+    [SerializeField] private GameObject _trajectoryPrediction;
 
     private void Start()
     {
@@ -43,6 +45,7 @@ public class LevelController : MonoBehaviour
 
     private void UpdateBallPosition()
     {
+        Instantiate(_ballCrushSystem, _ball.GetComponent<Transform>().position, Quaternion.identity);
         _ball.GetComponent<Transform>().position = _ballStartPosition;
         _ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         GameObject.FindWithTag("Player").GetComponent<ForceController>().IsBallThrowed = false;
